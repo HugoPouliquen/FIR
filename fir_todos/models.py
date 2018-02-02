@@ -6,7 +6,7 @@ from incidents.models import Incident, IncidentCategory, BusinessLine, Label
 
 
 class TodoItem(models.Model):
-    description = models.CharField(max_length=140)
+    description = models.CharField(max_length=1000)
     incident = models.ForeignKey(Incident, blank=True, null=True)
     category = models.ForeignKey(IncidentCategory, blank=True, null=True)
     business_line = models.ForeignKey(BusinessLine, blank=True, null=True)
@@ -40,7 +40,7 @@ class TodoListTemplate(models.Model):
     name = models.CharField(max_length=100)
     category = models.ForeignKey(IncidentCategory, null=True, blank=True)
     concerned_business_lines = models.ManyToManyField(BusinessLine, blank=True)
-    
+
     todolist = models.ManyToManyField(TodoItem, blank=True, limit_choices_to={"incident__isnull": True})
 
     def __unicode__(self):
